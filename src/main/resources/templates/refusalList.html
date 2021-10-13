@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Odmowy</title>
+    <link rel="stylesheet" th:href="@{/styles/cssandjs/myStyles.css}"/>
+</head>
+<body>
+<nav>
+    <a href="#" th:href="@{/}">Strona główna z historią</a> |
+    <a href="#" th:href="@{/emails}">Emaile z odmowami</a> |
+    <a href="#" th:href="@{/sendForms}"><b>Wyślij formularze do WIFu</b></a><sup>(wysyła formularze html przez http i zapisuje historię do bazy danych)</sup>
+
+</nav>
+
+<div>
+    <h2>Lista nowych raportów do WIFu<sup>(wczytana z załączników wiadomości)</sup></h2>
+
+    <h3 th:if="${refusalList.empty}">Brak odmów na liście</h3>
+    <table th:unless="${refusalList.empty}">
+        <thead>
+        <tr>
+            <th>Lp.</th>
+            <th>Data odmowy</th>
+            <th>Hurtownia</th>
+            <th>Adres</th>
+            <th>Lek</th>
+            <th>Dawka</th>
+            <th>Forma</th>
+            <th>Opak.</th>
+            <th>Odrzucono</th>
+            <th>Przyczyna odmowy</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="refusal : ${refusalList}">
+            <td><span th:text="${refusalStat.index+1}"/></td>
+            <td><span th:text="${refusal.receivedDate}"/></td>
+            <td><span th:text="${refusal.wholesalerName}"/></td>
+            <td><span th:text="${refusal.wholesalerAddress}"/></td>
+            <td><span th:text="${refusal.cureName}"/></td>
+            <td><span th:text="${refusal.cureDose}"/></td>
+            <td><span th:text="${refusal.cureForm}"/></td>
+            <td><span th:text="${refusal.curePack}"/></td>
+            <td><span th:text="${refusal.orderedAmount - refusal.receivedAmount}"/></td>
+            <td><span th:text="${refusal.refusalCause}"/></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

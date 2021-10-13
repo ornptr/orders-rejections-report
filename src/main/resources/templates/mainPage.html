@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Odmowy</title>
+    <link rel="stylesheet" th:href="@{/styles/cssandjs/myStyles.css}"/>
+
+</head>
+<body>
+<nav>
+    <a href="#" th:href="@{/emails}">Emaile z odmowami</a> |
+    <a href="#" th:href="@{/reset}"><b>Resetuj program</b></a><sup>(na potrzeby DEMO)</sup>
+</nav>
+
+<div>
+    <h2>Historia wysłanych do WIF raportów odmów<sup>(pobrana z bazy danych)</sup></h2>
+    <h3 th:if="${historyList.empty}">Brak raportów na liście</h3>
+    <table th:unless="${historyList.empty}">
+        <thead>
+        <tr>
+            <th>Lp.</th>
+            <th>Czy wysłano</th>
+            <th>Data odbioru</th>
+            <th>Próba wysłania</th>
+            <th>Nazwa hurtowni</th>
+            <th>Adres</th>
+            <th>Nazwa leku</th>
+            <th>Dawka</th>
+            <th>Forma</th>
+            <th>Opakowanie</th>
+            <th>Odrzucono</th>
+            <th>Przyczyna odmowy</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${historyList.empty}">
+            <td colspan="11">Brak odmów na liście</td>
+        </tr>
+        <tr th:each="refusal : ${historyList}">
+            <td><span th:text="${refusalStat.index+1}"/></td>
+            <td><span th:text="${refusal.isSent} ? 'tak' : 'nie'"/></td>
+            <td><span th:text="${refusal.receivedDate}"/></td>
+            <td><span th:text="${refusal.sentDate}"/></td>
+            <td><span th:text="${refusal.wholesalerName}"/></td>
+            <td><span th:text="${refusal.wholesalerAddress}"/></td>
+            <td><span th:text="${refusal.cureName}"/></td>
+            <td><span th:text="${refusal.cureDose}"/></td>
+            <td><span th:text="${refusal.cureForm}"/></td>
+            <td><span th:text="${refusal.curePack}"/></td>
+            <td><span th:text="${refusal.orderedAmount - refusal.receivedAmount}"/></td>
+            <td><span th:text="${refusal.refusalCause}"/></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

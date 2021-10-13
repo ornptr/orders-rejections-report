@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Odmowy</title>
+    <link rel="stylesheet" th:href="@{/styles/cssandjs/myStyles.css}"/>
+</head>
+<body>
+<nav>
+    <a href="#" th:href="@{/}">Strona główna z historią</a> |
+    <a href="#" th:href="@{/refreshEmails}">Pobierz wiadomości</a><sup>(odśwież)</sup> |
+    <a href="#" th:href="@{/refusalList}"><b>Przejdź do widoku odmów</b></a><sup>(dalej)</sup>
+</nav>
+
+<div>
+    <h1>Lista nowych wiadomości z odmowami zamówień<sup>(z konta email, odfiltrowana)</sup></h1>
+    <h2 th:unless="${messagesList.empty}">Kliknięcie daty kasuje z listy wybraną wiadomość wraz ze wszystkimi od niej starszymi</h2>
+
+    <h3 th:if="${messagesList.empty}">Brak wiadomości na liście</h3>
+    <table th:unless="${messagesList.empty}">
+        <thead>
+        <tr>
+            <th>Lp.</th>
+            <th>Temat wiadomości</th>
+            <th>Email nadawcy</th>
+            <th>Data otrzymania</th>
+            <th>Liczba pozycji</th>
+        </tr>
+        </thead>
+        <tbody>
+
+            <tr th:each="email : ${messagesList}">
+                <td><span th:text="${emailStat.index+1}"></span></td>
+                <td><span th:text="${email.subject}"></span></td>
+            <td><span th:text="${email.from}"></span></td>
+            <td><a th:href="@{/markLast/(messageId=${email.messageId})}"><span th:text="${email.receivedDate}"></span></a></td>
+                <td><span th:text="${email.itemsNum}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+spring:
+    datasource:
+        url: jdbc:h2:mem:test
+#        url: jdbc:h2:file:./db/refusalsDB
+        driverClassName: org.h2.Driver
+        username: sa
+        password:
+    h2:
+        console:
+            enabled: false
+            path: /console
+
+    thymeleaf:
+        cache: false
+        prefix: classpath:/templates/
+
+    jpa:
+        hibernate:
+            ddl-auto: validate
+
+email-config:
+    protocol: imap
+    host: gmail.com
+    port: 993
+    userName: [hidden]
+    password: [hidden]
+    searchKeywords: odmow, zorz, odmów
+    attachmentExtension: xml
+    probeSize: 20
+#    numOfDaysBack: 30
+    numOfDaysBack: 1095
+    inbox: INBOX
+
+server:
+    error:
+        whitelabel:
+            enabled: false
+    port: 81
+
+#development mode
+http-client-fields:
+    formUrl: https://docs.google.com/forms/u/3/d/e/1FAIpQLSeldkjb_-6dYWWdGGKyFpzdpa6noV_z7guRAryTK8yy1c-t2A/formResponse
+    phType: entry.983057874
+    phOwner: entry.870479501
+    phName: entry.1454399477
+    phLocality: entry.1049446547
+    phStreet: entry.453207464
+    drugType: entry.2130619695
+    drugDescription: entry.2139085671
+    whName: entry.2067642843
+    whLocality: entry.106381536
+    whStreet: entry.1972814570
+    reason: entry.1600681981
+    date: entry.1469083222
+    who: entry.1020543416
+    role: entry.1010298655
+
